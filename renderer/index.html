@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DMFV Print Agent</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">▣</div><div><strong>DMFV</strong><span>Print Agent</span></div></div>
+    <button class="nav active" data-section="overview">⌂ <span>Visão geral</span></button>
+    <button class="nav" data-section="printers">▤ <span>Impressoras</span></button>
+    <button class="nav" data-section="jobs">☷ <span>Fila de impressão</span></button>
+    <button class="nav" data-section="history">◷ <span>Histórico</span></button>
+    <button class="nav" data-section="themes">◐ <span>Temas</span></button>
+    <button class="nav" data-section="settings">⚙ <span>Configurações</span></button>
+    <div class="sidebar-footer"><i class="dot"></i><span id="localStatus">Agente iniciando</span><small id="version">v—</small></div>
+  </aside>
+
+  <main>
+    <header>
+      <div><h1>DMFV Print Agent</h1><p>Serviço local de impressão e dispositivos</p></div>
+      <div class="status-row"><span class="pill ok" id="agentPill">● Agente ativo</span><span class="pill muted" id="systemPill">○ Sistema não configurado</span></div>
+    </header>
+
+    <section id="overview" class="page active">
+      <div class="cards three">
+        <article class="card summary"><span class="icon">▣</span><div><small>Servidor local</small><strong id="serverAddress">—</strong></div></article>
+        <article class="card summary"><span class="icon">▤</span><div><small>Impressoras</small><strong id="printerCount">0 detectadas</strong></div></article>
+        <article class="card summary"><span class="icon">☷</span><div><small>Fila</small><strong id="queueCount">0 trabalhos</strong></div></article>
+      </div>
+      <div class="flow card"><span>PDV / Sistema</span><b>→</b><span>Agente local</span><b>→</b><span>Impressora</span></div>
+      <div id="overviewProfiles" class="card"></div>
+      <div class="split">
+        <div class="card"><div class="section-title"><h2>Fila de impressão</h2><small>Monitoramento automático</small></div><div id="queueList" class="empty">Nenhum trabalho na fila.</div></div>
+        <div class="card"><div class="section-title"><h2>Últimas impressões</h2><small>Persistem nesta sessão</small></div><div id="recentList" class="empty">Nada impresso ainda.</div></div>
+      </div>
+    </section>
+
+    <section id="printers" class="page">
+      <div class="page-head"><div><h2>Impressoras configuradas</h2><p>Associe cada uso a uma impressora instalada neste computador.</p></div><button id="refresh">Atualizar dispositivos</button></div>
+      <div id="printerProfiles" class="card"></div>
+    </section>
+
+    <section id="jobs" class="page"><div class="card"><div class="section-title"><h2>Fila de impressão</h2><small>Processamento sequencial</small></div><div id="jobsList" class="empty">Nenhum trabalho aguardando.</div></div></section>
+    <section id="history" class="page"><div class="card"><div class="section-title"><h2>Histórico recente</h2><small>Últimos trabalhos desta sessão</small></div><div id="historyList" class="empty">Nenhuma impressão registrada.</div></div></section>
+
+    <section id="themes" class="page"><div class="card"><div class="section-title"><h2>Temas</h2><small>Escolha um tema pronto para todo o agente</small></div><div class="theme-presets"><button data-theme-preset="dmfv">DMFV Amarelo</button><button data-theme-preset="purple">Roxo</button><button data-theme-preset="green">Verde</button><button data-theme-preset="red">Vermelho</button><button data-theme-preset="graphite">Grafite</button></div></div></section>
+
+    <section id="settings" class="page">
+      <div class="card settings-grid">
+        <div><label>Tema</label><select id="theme"><option value="dark">Escuro</option><option value="light">Claro</option><option value="system">Automático</option></select></div>
+        <div><label>Cor principal</label><input id="accent" type="color" value="#2f7df6"></div>
+        <label class="switch-line"><span>Iniciar com o Windows<small>Abre silenciosamente na bandeja.</small></span><input id="autostart" type="checkbox"><i></i></label>
+        <label class="switch-line"><span>Detectar automaticamente<small>Atualiza dispositivos instalados.</small></span><input id="autoDetect" type="checkbox"><i></i></label>
+        <label class="switch-line"><span>Impressão silenciosa<small>Imprime sem abrir diálogo.</small></span><input id="silentPrinting" type="checkbox"><i></i></label>
+        <label class="switch-line"><span>Fallback pelo navegador<small>Será usado pela plataforma se o agente estiver offline.</small></span><input id="fallbackToBrowser" type="checkbox"><i></i></label>
+        
+        <div class="actions full"><button class="secondary" id="openConfig">Abrir pasta de configuração</button><button id="saveSettings">Salvar configurações</button></div>
+      </div>
+    </section>
+    <div id="toast"></div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
